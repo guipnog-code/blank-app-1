@@ -12,8 +12,13 @@ st.title("📖 Tutorial: Como Assinar Digitalmente e Enviar")
 st.markdown("<p style='margin-top: -10px; margin-bottom: 15px;'>Siga o passo a passo ilustrado abaixo enquanto realiza o processo:</p>", unsafe_allow_html=True)
 
 # Exibe o player do áudio/vídeo explicativo logo no topo
-if os.path.exists("Audio_tutorial.mp4"):
-    st.video("Audio_tutorial.mp4")
+# Verifica o arquivo padrão ou o arquivo que você subiu do WhatsApp
+audio_path = "Audio_tutorial.mp4"
+if not os.path.exists(audio_path) and os.path.exists("WhatsApp Audio 2026-07-29 at 12.18.46.mp4"):
+    audio_path = "WhatsApp Audio 2026-07-29 at 12.18.46.mp4"
+
+if os.path.exists(audio_path):
+    st.video(audio_path)
     st.caption("🎧 *Dica: Você pode reproduzir o guia e pausar ou acelerar a reprodução conforme sua necessidade.*")
 else:
     st.info("💡 *(Arquivo de áudio/vídeo do tutorial não encontrado na raiz do projeto)*")
@@ -46,19 +51,24 @@ passos = [
     ("Passo 22: Compartilhar os documentos via WhatsApp", "1000127303"),
 ]
 
-# Exibição iterativa dos passos com as imagens redimensionadas
+# Exibição iterativa dos passos procurando nas pastas "Imagens", "imagens" ou na raiz
 for titulo, nome_base in passos:
     st.subheader(titulo)
     
     arquivo_encontrado = None
-    for ext in [".jpeg", ".jpg", ".JPEG", ".JPG"]:
-        caminho_teste = os.path.join("imagens", nome_base + ext)
-        if os.path.exists(caminho_teste):
-            arquivo_encontrado = caminho_teste
+    pastas_possiveis = ["Imagens", "imagens", "."]
+    
+    for pasta in pastas_possiveis:
+        for ext in [".jpeg", ".jpg", ".JPEG", ".JPG", ".png", ".PNG"]:
+            caminho_teste = os.path.join(pasta, nome_base + ext)
+            if os.path.exists(caminho_teste):
+                arquivo_encontrado = caminho_teste
+                break
+        if arquivo_encontrado:
             break
             
     if arquivo_encontrado:
         st.image(arquivo_encontrado, width=400)
     else:
-        st.info(f"*(Imagem '{nome_base}' não encontrada na pasta 'imagens')*")
+        st.info(f"*(Imagem '{nome_base}' não encontrada)*")
     st.markdown("---")
