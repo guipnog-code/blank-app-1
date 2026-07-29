@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 
-# Configuração da página para focar no tutorial
+# Configuração da página DEVE ser a PRIMEIRA linha de comando do Streamlit
 st.set_page_config(
     page_title="Tutorial de Assinatura Digital",
     page_icon="📖",
