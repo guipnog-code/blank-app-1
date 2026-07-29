@@ -12,7 +12,6 @@ st.title("📖 Tutorial: Como Assinar Digitalmente e Enviar")
 st.markdown("<p style='margin-top: -10px; margin-bottom: 15px;'>Siga o passo a passo ilustrado abaixo enquanto realiza o processo:</p>", unsafe_allow_html=True)
 
 # Exibe o player do áudio/vídeo explicativo logo no topo
-# Verifica o arquivo padrão ou o arquivo que você subiu do WhatsApp
 audio_path = "Audio_tutorial.mp4"
 if not os.path.exists(audio_path) and os.path.exists("WhatsApp Audio 2026-07-29 at 12.18.46.mp4"):
     audio_path = "WhatsApp Audio 2026-07-29 at 12.18.46.mp4"
@@ -25,41 +24,40 @@ else:
 
 st.markdown("---")
 
-# Lista associando o título do passo ao nome exato do arquivo de imagem correspondente
+# Lista dos 22 passos mapeados exatamente para os nomes 'passo_01.jpeg' até 'passo_22.jpeg'
 passos = [
-    ("Passo 1: Baixar os documentos gerados", "1000127282"),
-    ("Passo 2: Abrir o aplicativo Gov.br", "1000127283"),
-    ("Passo 3: Localizar o serviço", "1000127284"),
-    ("Passo 4: Selecionar 'Assinar documentos digitalmente'", "1000127285"),
-    ("Passo 5: Clicar em 'Escolher arquivo'", "1000127286"),
-    ("Passo 6: Selecionar os PDFs recentes", "1000127287"),
-    ("Passo 7: Visualizar o documento carregado", "1000127288"),
-    ("Passo 8: Arrastar o quadrado para a área de assinatura", "1000127289"),
-    ("Passo 9: Confirmar a assinatura", "1000127290"),
-    ("Passo 10: Opção de carregar outro documento", "1000127291"),
-    ("Passo 11: Iniciar o processo de assinar ambos", "1000127292"),
-    ("Passo 12: Autorização via notificação", "1000127293"),
-    ("Passo 13: Digitar o código recebido", "1000127294"),
-    ("Passo 14: Clicar em Autorizar", "1000127295"),
-    ("Passo 15: Concluir etapa de assinatura", "1000127296"),
-    ("Passo 16: Baixar arquivos assinados", "1000127297"),
-    ("Passo 17: Menu de opções do navegador", "1000127298"),
-    ("Passo 18: Abrir no navegador Chrome", "1000127299"),
-    ("Passo 19: Retornar às opções", "1000127300"),
-    ("Passo 20: Acessar pasta de Transferências", "1000127301"),
-    ("Passo 21: Localizar os arquivos assinados", "1000127302"),
-    ("Passo 22: Compartilhar os documentos via WhatsApp", "1000127303"),
+    ("Passo 1: Baixar os documentos gerados", "passo_01"),
+    ("Passo 2: Abrir o aplicativo Gov.br", "passo_02"),
+    ("Passo 3: Localizar o serviço", "passo_03"),
+    ("Passo 4: Selecionar 'Assinar documentos digitalmente'", "passo_04"),
+    ("Passo 5: Clicar em 'Escolher arquivo'", "passo_05"),
+    ("Passo 6: Selecionar os PDFs recentes", "passo_06"),
+    ("Passo 7: Visualizar o documento carregado", "passo_07"),
+    ("Passo 8: Arrastar o quadrado para a área de assinatura", "passo_08"),
+    ("Passo 9: Confirmar a assinatura", "passo_09"),
+    ("Passo 10: Opção de carregar outro documento", "passo_10"),
+    ("Passo 11: Iniciar o processo de assinar ambos", "passo_11"),
+    ("Passo 12: Autorização via notificação", "passo_12"),
+    ("Passo 13: Digitar o código recebido", "passo_13"),
+    ("Passo 14: Clicar em Autorizar", "passo_14"),
+    ("Passo 15: Concluir etapa de assinatura", "passo_15"),
+    ("Passo 16: Baixar arquivos assinados", "passo_16"),
+    ("Passo 17: Menu de opções do navegador", "passo_17"),
+    ("Passo 18: Abrir no navegador Chrome", "passo_18"),
+    ("Passo 19: Retornar às opções", "passo_19"),
+    ("Passo 20: Acessar pasta de Transferências", "passo_20"),
+    ("Passo 21: Localizar os arquivos assinados", "passo_21"),
+    ("Passo 22: Compartilhar os documentos via WhatsApp", "passo_22"),
 ]
 
-# Exibição iterativa dos passos procurando nas pastas "Imagens", "imagens" ou na raiz
+# Exibição iterativa buscando dentro da pasta 'Imagens'
 for titulo, nome_base in passos:
     st.subheader(titulo)
     
     arquivo_encontrado = None
-    pastas_possiveis = ["Imagens", "imagens", "."]
-    
-    for pasta in pastas_possiveis:
-        for ext in [".jpeg", ".jpg", ".JPEG", ".JPG", ".png", ".PNG"]:
+    # Verifica variações de extensão (jpeg, jpg, etc.) dentro da pasta 'Imagens' ou 'imagens'
+    for pasta in ["Imagens", "imagens"]:
+        for ext in [".jpeg", ".jpg", ".JPEG", ".JPG"]:
             caminho_teste = os.path.join(pasta, nome_base + ext)
             if os.path.exists(caminho_teste):
                 arquivo_encontrado = caminho_teste
@@ -70,5 +68,5 @@ for titulo, nome_base in passos:
     if arquivo_encontrado:
         st.image(arquivo_encontrado, width=400)
     else:
-        st.info(f"*(Imagem '{nome_base}' não encontrada)*")
+        st.info(f"*(Imagem '{nome_base}.jpeg' não encontrada)*")
     st.markdown("---")
